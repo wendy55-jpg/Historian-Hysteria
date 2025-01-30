@@ -1,19 +1,4 @@
-def process_input(input_str):
-    # Split input into lines and then separate the left and right numbers
-    lines = input_str.strip().split('\n')
-    
-    left_list = []
-    right_list = []
-    
-    for line in lines:
-        left, right = line.split()
-        left_list.append(int(left))
-        right_list.append(int(right))
-    
-    return left_list, right_list
-
-# Example input as a string (you can replace this with your input)
-input_str = """
+num = """
 76569   66648
 38663   66530
 60350   60777
@@ -1016,9 +1001,42 @@ input_str = """
 24373   20896
 """
 
-# Process the input string to get two lists
-left_list, right_list = process_input(input_str)
+def get_num_into_list(num):
+    lines = num.strip().split('\n')
+    
+    left_list = []
+    right_list = []
+    
+    for line in lines:
+        left, right = line.split()
+        left_list.append(int(left))
+        right_list.append(int(right))
+    
+    return left_list, right_list
 
-print("Left List:", left_list)
-print("Right List:", right_list)
+left_list, right_list = get_num_into_list(num)
+
+
+def paired_list(left_list, right_list):
+    left_list.sort()
+    right_list.sort()
+    
+    pairs = list(zip(left_list, right_list))
+    
+    return pairs
+
+pairs = paired_list(left_list, right_list)
+
+def total_distance(pairs):
+    total_distance = 0
+    for pair in pairs:
+        total_distance += abs(pair[0] - pair[1])
+    
+    return total_distance
+
+pairs = paired_list(left_list, right_list)
+
+total_distance = total_distance(pairs)
+
+print(f'Total distance: {total_distance}')
 
